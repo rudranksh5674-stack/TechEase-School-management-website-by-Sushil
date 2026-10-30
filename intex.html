@@ -1,0 +1,223 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeachEase | School Management</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest./json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h2>📘 TeachEase</h2>
+      <p class="subtitle">School Management</p>
+
+      <nav>
+        <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+        <button class="nav-btn" data-page="students">👨‍🎓 Students</button>
+        <button class="nav-btn" data-page="attendance">📅 Attendance</button>
+        <button class="nav-btn" data-page="reports">📊 Reports</button>
+      </nav>
+
+      <p class="sidebar-footer">TeachEase v1.0</p>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <p>Welcome to TeachEase</p>
+        </div>
+        <span class="profile">👨‍💻 Created by SUSHIL KUMAR</span>
+      
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="dashboard">
+        <div class="date-control">
+          <label for="dashboardDate">Attendance date:</label>
+          <input type="date" id="dashboardDate">
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p>Total Students</p>
+            <h2 id="totalStudents">0</h2>
+            <span>Registered students</span>
+          </article>
+
+          <article class="stat-card">
+            <p>Present</p>
+            <h2 id="presentStudents">0</h2>
+            <span>Students present</span>
+          </article>
+
+          <article class="stat-card">
+            <p>Absent</p>
+            <h2 id="absentStudents">0</h2>
+            <span>Students absent</span>
+          </article>
+
+          <article class="stat-card">
+            <p>Attendance Rate</p>
+            <h2 id="attendancePercentage">0%</h2>
+            <span>For selected date</span>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="panel">
+            <h2>Attendance Overview</h2>
+            <p id="chartDateLabel">Selected date</p>
+
+            <div class="chart">
+              <div class="bar-group">
+                <div class="bar present-bar" id="presentBar"></div>
+                <span>Present</span>
+                <strong id="chartPresent">0</strong>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar absent-bar" id="absentBar"></div>
+                <span>Absent</span>
+                <strong id="chartAbsent">0</strong>
+              </div>
+            </div>
+
+            <p class="muted" id="chartNote">No attendance saved for this date.</p>
+          </section>
+
+          <section class="panel">
+            <h2>Recent Activity</h2>
+            <div id="recentActivity">
+              <p class="muted">No recent attendance activity.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- STUDENTS -->
+      <section class="page" id="students">
+        <section class="panel">
+          <h2>Add a Student</h2>
+
+          <form id="studentForm">
+            <div class="form-grid">
+              <div>
+                <label for="studentName">Student name</label>
+                <input id="studentName" type="text" required
+                  placeholder="Enter full name">
+              </div>
+
+              <div>
+                <label for="rollNumber">Roll number</label>
+                <input id="rollNumber" type="text" required
+                  placeholder="Enter roll number">
+              </div>
+
+              <div>
+                <label for="studentClass">Class</label>
+                <input id="studentClass" type="text" required
+                  placeholder="e.g. 8A">
+              </div>
+            </div>
+
+            <button type="submit" class="primary-btn">Add Student</button>
+            <p id="studentMessage" class="message" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <h2>Student Records</h2>
+            <span id="studentCount">0 students</span>
+          </div>
+
+          <input id="studentSearch" type="search"
+            placeholder="Search by name, roll number or class...">
+
+          <div id="studentList" class="table-container"></div>
+        </section>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section class="page" id="attendance">
+        <section class="panel">
+          <h2>Attendance Calendar</h2>
+
+          <div class="calendar-controls">
+            <label for="calendarMonth">Choose month</label>
+            <input type="month" id="calendarMonth">
+          </div>
+
+          <div id="attendanceCalendar" class="calendar-grid"></div>
+          <p class="muted">Green dates have saved attendance.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Mark Attendance</h2>
+
+          <div class="date-control">
+            <label for="attendanceDate">Select date:</label>
+            <input type="date" id="attendanceDate">
+          </div>
+
+          <div id="attendanceList" class="table-container"></div>
+
+          <div class="button-row">
+            <button id="saveAttendance" class="primary-btn" type="button">
+              Save Attendance
+            </button>
+            <button id="exportAttendance" class="secondary-btn" type="button">
+              Export Attendance CSV
+            </button>
+          </div>
+
+          <p id="attendanceMessage" class="message" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="page" id="reports">
+        <section class="panel">
+          <div class="section-heading">
+            <h2>Attendance Reports</h2>
+            <button id="exportReport" class="primary-btn" type="button">
+              Export Report CSV
+            </button>
+          </div>
+
+          <p class="muted">
+            Reports include each student's attendance percentage
+            based on saved attendance records.
+          </p>
+
+          <div id="reportList" class="table-container"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+<script src="script.js"></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js")
+        .catch(error => {
+          console.error("Service worker registration failed:", error);
+        });
+    });
+  }
+</script>
+
+</body>
+</html>
+</body>
+</html>
